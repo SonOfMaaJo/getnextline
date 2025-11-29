@@ -6,7 +6,7 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:27:33 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/11/25 14:54:38 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/11/28 00:09:10 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -18,6 +18,8 @@
 
 char    *get_next_line(int fd);
 size_t  get_len_line(int fd);
-size_t  is_completel(char *buffer);
+int     is_completel(char *buffer);
+char    *free_l(char *line);
+char    *ft_strncat_l(char *dest, char *buffer, size_t len);
 
 #endif
