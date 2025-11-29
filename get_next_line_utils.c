@@ -6,12 +6,12 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:37:59 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/11/28 00:50:39 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:36:12 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-int  is_completel(char *buffer)
+static int  is_completel(char *buffer)
 {
     size_t  i;
 
@@ -19,55 +19,79 @@ int  is_completel(char *buffer)
     while (buffer[i] && buffer[i] != '\n')
         i++;
     if (buffer[i] == '\n')
-        return (i);
-    return (-1);
+        return (1);
+    return (0);
 }
 
-size_t  get_len_line(int fd)
+size_t  get_len_line(char *content_buffer)
 {
-    char    buffer[BUFFER_SIZE];
-    size_t  len;
-    int     i;
-    int     j;
+    size_t	i;
 
-    len = 0;
-    i = read(fd, buffer, BUFFER_SIZE);
-    if (i >= 0)
-        buffer[i] = '\0';
-    while (i > 0)
-    {
-        j = is_completel(buffer);
-        if (j >= 0)
-            return (len + j);
-        len += i;
-        i = read(fd, buffer, BUFFER_SIZE);
-        if (i < 0)
-            return (0);
-        buffer[i] = '\0';
-    }
-    close(fd);
-    return (len);
+	i = 0;
+	if (!content_buffer)
+		return (0);
+	while (content_buffer[i] != '\n' && content_buffer[i])
+		i++;
+	if (content_buffer[i] == '\n')
+		i++;
+	return (i);
 }
 
-char    *ft_strncat_l(char *dest, char *buffer, size_t len)
+size_t	ft_strncat_l(char *dest, char *buffer, size_t len)
 {
     size_t  i;
     size_t  j;
 
     i = 0;
     j = 0;
-    if (!dest)
-        return (NULL);
+    if (dest == NULL)
+        return (0);
     while (dest[i])
         i++;
     while (i + j < len && buffer[j])
-        dest[i + j] = buffer[i];
+	{
+        dest[i + j] = buffer[j];
+		j++;
+	}
     dest[i + j] = '\0';
-    return (dest);
+    return (i + j);
 }
 
-char    *free_l(char *line)
+static char    *init_fread(char *buffer, char **content_buffer, size_t *size)
 {
-    free(line);
-    return (NULL);
+	char	*content;
+
+	content = (char *)malloc(sizeof(char) * (*size + 1));
+	if (content)
+	{
+		content[0] = '\0';
+		ft_strncat_l(content, *content_buffer, *size + 1);
+		ft_strncat_l(content, buffer, *size + 1);
+	}
+	free(*content_buffer);
+	return (content);
+}
+
+int read_and_save(int fd, char	**content_buffer, size_t *size_content)
+{
+	char	buffer[BUFFER_SIZE];
+	int		i;
+
+	if (fd < 0 || *content_buffer == NULL)
+		return (0);
+	i = read(fd, buffer, BUFFER_SIZE);
+	if (i <= 0)
+		return (0);
+	while (i > 0)
+	{
+		buffer[i] = '\0';
+		*size_content += i;
+		*content_buffer = init_fread(buffer, content_buffer, size_content);
+		if (is_completel(buffer))
+			return (1);
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i == -1)
+			return (0);
+	}
+	return (1);
 }

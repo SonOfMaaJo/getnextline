@@ -2,16 +2,24 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int main(void)
+int main(int ac, char **av)
 {
-    int     fd;
+	int	fd;
 
-    fd = open("test", O_RDONLY);
-    if (fd == -1)
-        return (0);
-    printf("debut du debugging");
-    printf("mot = %s", get_next_line(fd));
-    close(fd);
+	fd = 0;
+	printf("%s", (char *)av[0]);
+	if (ac > 1)
+	{
+		printf("%s", get_next_line(fd));
+		return (0);
+	}
+	fd = open("test", O_RDONLY);
+	if (fd == -1)
+		return (0);
+    printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	close(fd);
     return (0);
 }
 

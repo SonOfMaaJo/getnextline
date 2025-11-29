@@ -6,7 +6,7 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:27:33 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/11/28 00:09:10 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:44:19 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -17,9 +17,8 @@
 # define BUFFER_SIZE 42
 
 char    *get_next_line(int fd);
-size_t  get_len_line(int fd);
-int     is_completel(char *buffer);
-char    *free_l(char *line);
-char    *ft_strncat_l(char *dest, char *buffer, size_t len);
+size_t  get_len_line(char *content_buffer);
+int		read_and_save(int fd, char **content_buffer, size_t *size_content);
+size_t	ft_strncat_l(char *dest, char *buffer, size_t len);
 
 #endif
