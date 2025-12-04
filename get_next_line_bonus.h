@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:27:33 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/12/04 20:21:39 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/12/04 23:18:13 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -17,6 +17,7 @@
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
 #endif
+# define OPEN_MAX 1024
 
 char    *get_next_line(int fd);
 size_t  get_len_line(char *content_buffer);

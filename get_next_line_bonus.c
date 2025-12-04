@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 23:01:06 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/12/04 22:13:37 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/12/04 23:24:49 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void	ft_move(char *rest, int size)
 {
@@ -61,10 +61,9 @@ static char *iscmplonrest(char *rest, size_t *size_c)
 	return (content);
 }
 
-char    *get_next_line(int fd)
+static char    *get_next_liner(int fd, char *rest)
 {
 	char	*content_b;
-	static char	rest[BUFFER_SIZE];
 	size_t	size;
 
 	if (fd < 0)
@@ -86,4 +85,11 @@ char    *get_next_line(int fd)
 		return (ft_free(content_b), NULL);
 	content_b = ft_strdup_trim(content_b, rest);
 	return (content_b);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	rest[OPEN_MAX][BUFFER_SIZE + 1];
+
+	return (get_next_liner(fd, rest[fd]));
 }
