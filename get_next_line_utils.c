@@ -6,20 +6,20 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:37:59 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/12/04 21:36:29 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:57:00 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-int		ft_free(char *buffer)
+int	ft_free(char *buffer)
 {
 	free(buffer);
 	return (1);
 }
 
-size_t  get_len_line(char *content_b)
+size_t	get_len_line(char *content_b)
 {
-    size_t	i;
+	size_t	i;
 
 	i = 0;
 	if (!content_b)
@@ -33,27 +33,27 @@ size_t  get_len_line(char *content_b)
 
 size_t	ft_strncat_l(char *dest, char *buffer, size_t len, char c)
 {
-    size_t  i;
-    size_t  j;
+	size_t	i;
+	size_t	j;
 
-    i = 0;
-    j = 0;
-    if (dest == NULL  || buffer == NULL)
-        return (0);
-    while (dest[i])
-        i++;
-    while (i + j < len && buffer[j] && buffer[j] != c)
+	i = 0;
+	j = 0;
+	if (dest == NULL || buffer == NULL)
+		return (0);
+	while (dest[i])
+		i++;
+	while (i + j < len && buffer[j] && buffer[j] != c)
 	{
-        dest[i + j] = buffer[j];
+		dest[i + j] = buffer[j];
 		j++;
 	}
 	if (buffer[j] == c && buffer[j])
 		dest[i + j++] = c;
-    dest[i + j] = '\0';
-    return (j);
+	dest[i + j] = '\0';
+	return (j);
 }
 
-char    *init_fread(char *buffer, char *content_b, size_t size, char c)
+char	*init_fread(char *buffer, char *content_b, size_t size, char c)
 {
 	char	*content;
 
@@ -72,7 +72,7 @@ char    *init_fread(char *buffer, char *content_b, size_t size, char c)
 	return (content);
 }
 
-int read_and_save(int fd, char	**content_b, size_t *size_content)
+int	read_and_save(int fd, char	**content_b, size_t *size_content)
 {
 	char	*buffer;
 	int		i;

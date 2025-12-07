@@ -6,7 +6,7 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 23:01:06 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/12/04 22:13:37 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:59:38 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -45,7 +45,7 @@ static char	*ft_strdup_trim(char *content_b, char *rest)
 	return (line);
 }
 
-static char *iscmplonrest(char *rest, size_t *size_c)
+static char	*iscmplonrest(char *rest, size_t *size_c)
 {
 	int		size;
 	char	*content;
@@ -61,11 +61,11 @@ static char *iscmplonrest(char *rest, size_t *size_c)
 	return (content);
 }
 
-char    *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char	*content_b;
+	char		*content_b;
 	static char	rest[BUFFER_SIZE];
-	size_t	size;
+	size_t		size;
 
 	if (fd < 0)
 		return (NULL);
