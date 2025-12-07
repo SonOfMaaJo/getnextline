@@ -6,7 +6,7 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 23:01:06 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/12/04 23:24:49 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/12/04 23:58:06 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -61,35 +61,29 @@ static char *iscmplonrest(char *rest, size_t *size_c)
 	return (content);
 }
 
-static char    *get_next_liner(int fd, char *rest)
+char    *get_next_line(int fd)
 {
 	char	*content_b;
+	static char	rest[OPEN_MAX][BUFFER_SIZE + 1];
 	size_t	size;
 
 	if (fd < 0)
 		return (NULL);
-	content_b = iscmplonrest(rest, &size);
+	content_b = iscmplonrest(rest[fd], &size);
 	if (content_b)
 		return (content_b);
 	content_b = (char *)malloc(sizeof(char) * (size + 1));
 	if (!content_b)
 		return (NULL);
 	content_b[0] = '\0';
-	size = ft_strncat_l(content_b, rest, size, '\0');
+	size = ft_strncat_l(content_b, rest[fd], size, '\0');
 	if (!read_and_save(fd, &content_b, &size))
 	{
-		rest[0] = '\0';
+		rest[fd][0] = '\0';
 		return (ft_free(content_b), NULL);
 	}
 	if (!content_b[0])
 		return (ft_free(content_b), NULL);
-	content_b = ft_strdup_trim(content_b, rest);
+	content_b = ft_strdup_trim(content_b, rest[fd]);
 	return (content_b);
-}
-
-char	*get_next_line(int fd)
-{
-	static char	rest[OPEN_MAX][BUFFER_SIZE + 1];
-
-	return (get_next_liner(fd, rest[fd]));
 }
