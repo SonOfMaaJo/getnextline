@@ -6,7 +6,7 @@
 /*   By: vnaoussi <vnaoussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:27:33 by vnaoussi          #+#    #+#             */
-/*   Updated: 2025/12/08 00:51:39 by vnaoussi         ###   ########.fr       */
+/*   Updated: 2025/12/08 02:32:11 by vnaoussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_BONUS_H
@@ -17,7 +17,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-# define OPEN_MAX 718
 
 typedef struct s_list
 {
